@@ -1,3 +1,5 @@
+require 'pry-byebug'
+
 class Graph
   attr_accessor :neighbors, :board
 
@@ -6,8 +8,29 @@ class Graph
     @neighbors = gen_neighbors
   end
 
-  def knight_moves(curr=input, dest)
+  def knight_moves(curr, dest)
+    #binding.pry
     # TODO
+    q = []
+    q.push(curr)
+
+    visited = []
+    visited.push(curr)
+
+    prev = {}
+    while !q.empty?
+      node = q.shift
+      moves = neighbors[node]
+
+      moves.each do |move|
+        unless visited.include?(move)
+          q.push(move)
+          visited.push(move)
+          prev[move] = node
+        end
+      end
+    end
+    prev
   end
 
   private
@@ -38,12 +61,6 @@ class Graph
 end
 
 graph = Graph.new
-moves = {}
-graph.board.each do |cell|
-  moves[cell] = []
-  moves[cell].push([cell[0]-1,cell[1]+2]) if graph.board.include?([cell[0]-1,cell[1]+2])
-  moves[cell].push([cell[0]+1,cell[1]+2]) if graph.board.include?([cell[0]+1,cell[1]+2])
-  moves[cell].push([cell[0]+2,cell[1]+1]) if graph.board.include?([cell[0]-1,cell[1]+2])
-end
 
-p graph.neighbors
+p graph.knight_moves([0,0], [2,1]).to_a
+
