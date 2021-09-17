@@ -80,5 +80,5 @@ end
 
 graph = Graph.new
 
-p graph.knight_moves([0,0], [7,7])
+p graph.knight_moves([4,4], [1,2])
 
