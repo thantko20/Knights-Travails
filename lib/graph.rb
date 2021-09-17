@@ -1,11 +1,10 @@
 require 'pry-byebug'
 
-class Graph
+class Board
   attr_accessor :neighbors, :board
 
   def initialize
-    @board = (0..7).to_a.product (0..7).to_a
-    @neighbors = gen_neighbors
+    @neighbor_cells = {} #TODO
   end
 
   def knight_moves(curr, dest)
