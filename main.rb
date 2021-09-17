@@ -18,5 +18,29 @@ def ask_dest
   [x, y]
 end
 
-board = Board.new
-p board.knight_moves(ask_start, ask_dest)
+def print_path(path)
+  puts "You made it in #{path.size - 1} moves! Here's your path!"
+  path.each do |cell|
+    p cell
+  end
+end
+
+def ask_for_another
+  puts 'Do you want to calculate another path again?(Y/n)'
+  input = gets.chomp.to_s
+  input.upcase == 'Y'
+end
+
+loop do
+  board = Board.new
+  puts 'This program calculates the shortest path a knight can travel from one point to another'
+  src = ask_start
+  dest = ask_start
+  unless board.board_cells.include?(src) && board.board_cells.include?(dest)
+    puts 'Enter coordinates ranging from 0 to 7'
+    next
+  end
+  path = board.knight_moves(src, dest)
+  print_path(path)
+  break if !ask_for_another
+end
