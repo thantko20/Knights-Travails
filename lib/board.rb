@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 require_relative 'board_cells'
 require_relative 'knights'
-require 'pry-byebug'
 
 class Board
   include Creatable
@@ -11,14 +12,14 @@ class Board
   end
 
   def knight_moves(curr, dest)
-    q = []
-    q.push(curr)
+    queue = []
+    queue.push(curr)
 
     visited = []
     visited.push(curr)
 
     predecessors_track = []
-    fifo(q, dest, visited, predecessors_track)
+    fifo(queue, dest, visited, predecessors_track)
     construct_path(predecessors_track)
   end
 
@@ -47,24 +48,24 @@ class Board
     adjacency_hash
   end
 
-  def fifo(q, dest, visited, predecessors_track)
-    until q.empty?
-      node = q.shift
+  def fifo(queue, dest, visited, predecessors_track)
+    until queue.empty?
+      node = queue.shift
       moves = @neighbor_cells[node]
       moves.each do |move|
         next if visited.include?(move)
 
-        q.push(move)
+        queue.push(move)
         visited.push(move)
         predecessors_track.unshift([node, move])
-        break if check_dest(q, move, dest)
+        break if check_dest(queue, move, dest)
       end
     end
   end
 
-  def check_dest(q, move, dest)
+  def check_dest(queue, move, dest)
     if move == dest
-      q.clear
+      queue.clear
       return true
     end
     false
@@ -73,4 +74,4 @@ end
 
 graph = Board.new
 
-p graph.knight_moves([0,0], [3,3])
+p graph.knight_moves([3, 3], [4, 4])
