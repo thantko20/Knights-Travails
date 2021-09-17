@@ -1,10 +1,12 @@
-require 'pry-byebug'
+require_relative 'board_cells'
+require_relative 'knights'
 
 class Board
-  attr_accessor :neighbors, :board
+  include Creatable
+  attr_accessor :neighbor_cells
 
   def initialize
-    @neighbor_cells = {} #TODO
+    @neighbor_cells = add_each_cell_neighbors
   end
 
   def knight_moves(curr, dest)
@@ -52,6 +54,14 @@ class Board
 
   private
 
+  def add_each_cell_neighbors
+    adjacency_hash = {}
+    board_cells.each do |cell|
+      node = Knight.new(cell)
+      adjacency_hash[node.src] = node.legal_moves
+    end
+    adjacency_hash
+  end
   # I want like this
   # hash = {[0, 0] => [[0,1], [0,2]], etc}
   def gen_neighbors
@@ -77,7 +87,7 @@ class Board
   end
 end
 
-graph = Graph.new
+graph = Board.new
 
-p graph.knight_moves([4,4], [1,2])
+p graph.neighbor_cells
 
