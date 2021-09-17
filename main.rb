@@ -2,21 +2,13 @@
 
 require_relative './lib/board'
 
-def ask_start
-  puts 'Type a starting point [x, y]'
+def ask_input(type)
+  puts "Type a #{type} point [x, y]"
   puts 'Type x: '
   x = gets.chomp.to_i
   puts 'Type y: '
   y = gets.chomp.to_i
-  [x, y]
-end
-
-def ask_dest
-  puts 'Type a destination point [x, y]'
-  puts 'Type x: '
-  x = gets.chomp.to_i
-  puts 'Type y: '
-  y = gets.chomp.to_i
+  puts "Your #{type} point is #{[x, y]}"
   [x, y]
 end
 
@@ -36,8 +28,8 @@ end
 loop do
   board = Board.new
   puts 'This program calculates the shortest path a knight can travel from one point to another'
-  src = ask_start
-  dest = ask_start
+  src = ask_input('starting')
+  dest = ask_input('destination')
   puts "Your starting point is #{src} and destination point is #{dest}"
   unless board.board_cells.include?(src) && board.board_cells.include?(dest)
     puts 'Enter coordinates ranging from 0 to 7'
