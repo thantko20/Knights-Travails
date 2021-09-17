@@ -5,7 +5,6 @@ require_relative 'knights'
 
 class Board
   include Creatable
-  attr_accessor :neighbor_cells
 
   def initialize
     @neighbor_cells = add_each_cell_neighbors
@@ -21,20 +20,6 @@ class Board
     predecessors_track = []
     fifo(queue, dest, visited, predecessors_track)
     construct_path(predecessors_track)
-  end
-
-  def construct_path(predecessors_track)
-    arr = []
-    curr_child = predecessors_track.first.last
-    arr.push(curr_child)
-
-    predecessors_track.each do |relation|
-      if relation.last == curr_child
-        curr_child = relation.first
-        arr.unshift(curr_child)
-      end
-    end
-    arr
   end
 
   private
@@ -69,5 +54,19 @@ class Board
       return true
     end
     false
+  end
+
+  def construct_path(predecessors_track)
+    arr = []
+    curr_child = predecessors_track.first.last
+    arr.push(curr_child)
+
+    predecessors_track.each do |relation|
+      if relation.last == curr_child
+        curr_child = relation.first
+        arr.unshift(curr_child)
+      end
+    end
+    arr
   end
 end
