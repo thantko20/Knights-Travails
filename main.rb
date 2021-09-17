@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './lib/board'
 
 def ask_start
@@ -19,7 +21,7 @@ def ask_dest
 end
 
 def print_path(path)
-  puts "You made it in #{path.size - 1} moves! Here's your path!"
+  puts "You made it in #{path.size - 1} moves! Here's your path: "
   path.each do |cell|
     p cell
   end
@@ -36,11 +38,12 @@ loop do
   puts 'This program calculates the shortest path a knight can travel from one point to another'
   src = ask_start
   dest = ask_start
+  puts "Your starting point is #{src} and destination point is #{dest}"
   unless board.board_cells.include?(src) && board.board_cells.include?(dest)
     puts 'Enter coordinates ranging from 0 to 7'
     next
   end
   path = board.knight_moves(src, dest)
   print_path(path)
-  break if !ask_for_another
+  break unless ask_for_another
 end
