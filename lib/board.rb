@@ -89,5 +89,4 @@ end
 
 graph = Board.new
 
-p graph.neighbor_cells
-
+p graph.neighbor_cells[[0,0]]
