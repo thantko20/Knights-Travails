@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'board_cells'
 
 class Knight
@@ -14,7 +16,7 @@ class Knight
     y = src.last
     arr = []
     moves = [[-1, -2], [-1, 2], [1, -2], [1, 2],
-     [-2, -1], [-2, 1], [2, -1], [2, 1]]
+             [-2, -1], [-2, 1], [2, -1], [2, 1]]
 
     moves.each do |move|
       arr.push([x + move.first, y + move.last])
@@ -26,6 +28,3 @@ class Knight
     array.select { |move| board_cells.include?(move) }
   end
 end
-
-knight = Knight.new([0,0])
-p knight.legal_moves
