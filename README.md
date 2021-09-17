@@ -4,7 +4,7 @@
 
 Knights Travails is also know as Knight's Tour problem which is given to computer science students. A knight can move any square on a chess board. This program finds the shortest path for a knight to travel from given square to destination square on the board.
 
-![Knight Travails](/Knights-Travails/demo_img/knight_travails_demo.png)
+![Knight Travails](/demo_img/knight_travails_demo.png)
 
 ## Data Structures and Algos used
 
