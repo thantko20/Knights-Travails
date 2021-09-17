@@ -17,7 +17,7 @@ class Graph
     visited = []
     visited.push(curr)
 
-    prev = {}
+    prev = []
     while !q.empty?
       node = q.shift
       moves = neighbors[node]
@@ -26,11 +26,29 @@ class Graph
         unless visited.include?(move)
           q.push(move)
           visited.push(move)
-          prev[move] = node
+          prev.unshift([node, move])
+          if move == dest
+            q.clear
+            break
+          end
         end
       end
     end
-    prev
+    construct_path(prev)
+  end
+
+  def construct_path(prev)
+    arr = []
+    curr_child = prev.first.last
+    arr.push(curr_child)
+
+    prev.each do |relation|
+      if relation.last == curr_child
+        curr_child = relation.first
+        arr.unshift(curr_child)
+      end
+    end
+    arr
   end
 
   private
@@ -62,5 +80,5 @@ end
 
 graph = Graph.new
 
-p graph.knight_moves([0,0], [2,1]).to_a
+p graph.knight_moves([0,0], [7,7])
 
