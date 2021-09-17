@@ -71,7 +71,3 @@ class Board
     false
   end
 end
-
-graph = Board.new
-
-p graph.knight_moves([3, 3], [4, 4])
